@@ -1,0 +1,53 @@
+{
+  "name": "loopback-example-tests",
+  "description": "Example showing testing scenarios in a Loopback 3 app",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "start": "node .",
+    "test": "NODE_ENV=test nyc mocha --opts mocha.opts",
+    "test-watch": "NODE_ENV=test mocha --opts mocha.opts --watch",
+    "posttest": "npm run lint && nsp check"
+  },
+  "keywords": [
+    "automation",
+    "e2e",
+    "example",
+    "js",
+    "loopback",
+    "mocha",
+    "rest",
+    "strongloop",
+    "test"
+  ],
+  "author": "Marc Ed Raffalli",
+  "license": "MIT",
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "dependencies": {
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "debug": "^3.1.0",
+    "helmet": "^3.10.0",
+    "loopback-boot": "^2.6.5",
+    "serve-favicon": "^2.0.1",
+    "strong-error-handler": "^2.0.0",
+    "loopback-component-explorer": "^5.0.0",
+    "loopback": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^3.17.1",
+    "eslint-config-loopback": "^8.0.0",
+    "lb-declarative-e2e-test": "^0.4.1",
+    "mocha": "^5.0.4",
+    "nsp": "^2.1.0",
+    "nyc": "^11.6.0"
+  }
+}

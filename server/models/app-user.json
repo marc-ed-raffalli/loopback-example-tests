@@ -1,0 +1,36 @@
+{
+  "name": "AppUser",
+  "base": "User",
+  "idInjection": true,
+  "strict": "filter",
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "favoriteDrink": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "findById",
+        "patchAttributes",
+        "updateAttributes",
+        "replaceAttributes",
+        "replaceById"
+      ]
+    }
+  ],
+  "methods": {}
+}

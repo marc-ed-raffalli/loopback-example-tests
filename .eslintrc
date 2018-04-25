@@ -1,0 +1,48 @@
+{
+  "extends": [
+    "loopback",
+    "eslint:recommended"
+  ],
+  "env": {
+    "browser": false,
+    "commonjs": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "no-console": "off",
+    "padded-blocks": "off",
+    "one-var": "off",
+    "max-len": "off",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "quote-props": [
+      "error",
+      "as-needed"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ]
+  }
+}
