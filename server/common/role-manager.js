@@ -1,8 +1,7 @@
 'use strict';
 
-const debug = require('debug')('example-tests:role-manager');
-
-let appRolesById = {};
+const debug = require('debug')('example-tests:role-manager'),
+  appRolesById = {};
 
 const roleManager = {
 
@@ -20,6 +19,7 @@ const roleManager = {
 
     return app.models.Role.create(roles.map(name => ({name: name})))
       .then(res => {
+        // cache role name for quick mapping
         res.forEach(role => appRolesById[role.id] = role.name);
         return res;
       });
@@ -52,12 +52,13 @@ const roleManager = {
   },
 
   /**
+   * Returns a promise which resolves when the role is set
    *
    * @param app
    * @param userId
    * @param {string}  roleName
-   * @param {boolean} reset
-   * @return {*}
+   * @param {boolean} reset delete previous role
+   * @return {Promise}
    */
   setUserRole: (app, userId, roleName, reset = false) => {
     debug(`${reset ? 'Removing previous role' : `Setting role ${roleName}`} for user ${userId}`);
@@ -84,15 +85,15 @@ const roleManager = {
         });
     }
 
-    return app.models.Role.findOne({name: roleName})
-      .then(role => {
-        return role.principals
+    return app.models.Role.findOne({where: {name: roleName}})
+      .then(role =>
+        role.principals
           .create({
             principalType: app.models.RoleMapping.USER,
             principalId: userId
           })
-          .tap(() => debug(`Role ${roleName} assigned to ${userId}`));
-      });
+      )
+      .tap(() => debug(`Role ${roleName} assigned to ${userId}`));
   },
 
   /**
@@ -105,7 +106,7 @@ const roleManager = {
    */
   removeUserRole: (app, userId, roleName) => {
     debug(`Removing role' : ${roleName} from user ${userId}`);
-    return app.models.Role.findOne({name: roleName})
+    return app.models.Role.findOne({where: {name: roleName}})
       .then(role => {
         return role.principals.destroyAll({where: {principalId: userId}});
       })
